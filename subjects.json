@@ -1,0 +1,88 @@
+{
+    "proper_subjects": {
+        "food": [
+            "food",
+            "meal",
+            "lunch",
+            "dinner",
+            "jevan",
+            "jewan",
+            "khana",
+            "khaana",
+            "nasta",
+            "naasta",
+            "breakfast",
+            "thali",
+            "beverages",
+            "hotel",
+            "restaurant"
+        ],
+        "shopping": [
+            "purchase",
+            "shopping",
+            "clothes",
+            "kharedi",
+            "kapde"
+        ],
+        "money-tranfer": [
+            "exchange",
+            "given",
+            "taken",
+            "received",
+            "dile",
+            "ghetle",
+            "milale",
+            "bhetle"
+        ],
+        "entertainment": [
+            "entertainment",
+            "picture",
+            "movie",
+            "mall",
+            "park"
+        ],
+        "health": [
+            "medicine",
+            "hospital",
+            "clinic",
+            "dawai",
+            "golya",
+            "goli",
+            "tablet",
+            "capsule",
+            "dawakhana"
+        ],
+        "travel": [
+            "travel",
+            "travelling",
+            "trekking",
+            "trek",
+            "city",
+            "beach",
+            "waterfall",
+            "safari",
+            "jungle",
+            "sanctuary",
+            "wildlife",
+            "wildlife"
+        ],
+        "other": [
+            "other",
+            "others"
+        ]
+    },
+    "slang_subjects": {
+        "food": [
+            "j1",
+            "jewlo",
+            "khalla",
+            "jewan"
+        ],
+        "shopping": [],
+        "money-tranfer": [],
+        "entertainment": [],
+        "health": [],
+        "travel": [],
+        "other": []
+    }
+}

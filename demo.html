@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" defer></script>
+    <script src="./trial.js" defer></script>
+</head>
+
+<body>
+    <h1>Mini NLU</h1>
+    <p>This service is a small experiment for natural language understanding.
+        Here we are not expecting to get 100% true meaning of sentence but rather just subject which should match my app
+        subjects which are as follows:
+    </p>
+    <ul>
+        <li>food</li>
+        <li>shopping</li>
+        <li>money-transfer</li>
+        <li>entertainment</li>
+        <li>health</li>
+        <li>travel</li>
+        <li>other</li>
+    </ul>
+
+    <div>
+        <input onkeyup="Identify_subject()" type="text" id="query" placeholder="enter query here...">
+    </div>
+
+    <div>
+        <p id="result">-- result appears here --</p>
+    </div>
+</body>
+
+</html>
