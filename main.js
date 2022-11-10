@@ -17,7 +17,13 @@ function Identify_subject() {
     let result = fetch_subject_for_query(query)
     console.log(result);
     console.log(showRanks());
-    document.querySelector("#result").innerHTML = result
+    document.querySelector("#result").innerHTML = `<table> 
+    <tr> <td>Category</td> <td>Closest word</td> <td>Match</td> </tr>
+    <tr> <td class='special'>${result.category}</td> <td class='special'>${result["closest word found"]}
+        </td> <td class='special'>${(result["match percentage"] * 100).toFixed(2)} %</td> </tr>
+    </table>`
+    
+    result
 }
 
 function fetch_subject_for_query(query) {
@@ -25,6 +31,7 @@ function fetch_subject_for_query(query) {
     let queryParts = query.split(" ")
     console.log(queryParts);
     let current_result = "unknown"
+    ranks = []
     for (let i = 0; i < queryParts.length; i++) {
         let search_result = SearchSubject(queryParts[i])
         let search_result_slang_word = SearchSubject(queryParts[i], 'slang_subjects')
@@ -35,14 +42,16 @@ function fetch_subject_for_query(query) {
         }
         //console.log(search_result, typeof (search_result));
         if (search_result.category == "unknown") {
-            current_result = `Category: ${search_result.category} | Closest word: ${search_result["closest word found"]} | Match percent: ${(search_result["match percentage"] * 100).toFixed(2)}%`
+            current_result = search_result
+            //`Category: ${search_result.category} | Closest word: ${search_result["closest word found"]} | Match percent: ${(search_result["match percentage"] * 100).toFixed(2)}%`
             continue
         }
-        else
-            return `Category: ${search_result.category} | Closest word: ${search_result["closest word found"]} | Match percent: ${(search_result["match percentage"] * 100).toFixed(2)}%`
+        current_result = search_result
+        //`Category: ${search_result.category} | Closest word: ${search_result["closest word found"]} | Match percent: ${(search_result["match percentage"] * 100).toFixed(2)}%`
     }
     return current_result
 }
+
 
 // Proper Subject indexing
 function SearchSubject(word, dataset = 'proper_subjects') {
@@ -63,12 +72,14 @@ function SearchSubject(word, dataset = 'proper_subjects') {
             if (similarity_percent > highest_percent) {
                 probable_key = current_key
                 closet_word = arr[i]
+                let rank_percent = highest_percent
                 highest_percent = similarity_percent
-                reranker({
-                    category: probable_key,
-                    "closest word found": closet_word,
-                    "match percentage": highest_percent
-                })
+                if (rank_percent < highest_percent)
+                    reranker({
+                        category: probable_key,
+                        "closest word found": closet_word,
+                        "match percentage": highest_percent
+                    })
             }
             if (word.toLowerCase().match(arr[i].toLowerCase())) {
                 return {
@@ -116,14 +127,18 @@ function similarity(s1, s2) {
 }
 
 function reranker(elem) {
-    ranks.push(elem)
+    if (ranks.length == 0)
+        ranks.push(elem)
+    else{
+        if(elem['match percentage'] > ranks[ranks.length-1]['match percentage'])
+            ranks.push(elem)
+    }
     if (ranks.length > 5)
         ranks.splice(0, 1)
 }
 
 function showRanks() {
     let duplicate = ranks.slice()
-
     return duplicate.reverse()
 }
 
