@@ -31,6 +31,7 @@ function fetch_subject_for_query(query) {
     let queryParts = query.split(" ")
     console.log(queryParts);
     let current_result = "unknown"
+    let last_result = {'match percentage':0}
     ranks = []
     for (let i = 0; i < queryParts.length; i++) {
         let search_result = SearchSubject(queryParts[i])
@@ -40,13 +41,17 @@ function fetch_subject_for_query(query) {
         if (search_result['match percentage'] < search_result_slang_word['match percentage']) {
             search_result = search_result_slang_word
         }
+
+        if(last_result["match percentage"] < search_result['match percentage']){
+            last_result = search_result
+        }
         //console.log(search_result, typeof (search_result));
         if (search_result.category == "unknown") {
-            current_result = search_result
+            current_result = last_result
             //`Category: ${search_result.category} | Closest word: ${search_result["closest word found"]} | Match percent: ${(search_result["match percentage"] * 100).toFixed(2)}%`
             continue
         }
-        current_result = search_result
+        current_result = last_result
         //`Category: ${search_result.category} | Closest word: ${search_result["closest word found"]} | Match percent: ${(search_result["match percentage"] * 100).toFixed(2)}%`
     }
     return current_result
