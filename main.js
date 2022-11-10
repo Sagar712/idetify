@@ -86,7 +86,7 @@ function SearchSubject(word, dataset = 'proper_subjects') {
                         "match percentage": highest_percent
                     })
             }
-            if (word.toLowerCase().match(arr[i].toLowerCase())) {
+            if (word.toLowerCase() === (arr[i].toLowerCase())) {
                 return {
                     category: current_key,
                     "closest word found": closet_word,
